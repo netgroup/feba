@@ -1,0 +1,43 @@
+OVERVIEW
+--------
+
+Feature Extraction Based on Action (FEBA) framework, for behavioural identification and authentication, is composed of
+several components which provides the developer with a means to define application-specific actions and action specific
+features. The framework recognizes user actions based on the received raw data, extracts the action-specific features
+and finally generates datasets.
+
+The output of the framework could be used along with the existing learning and classification algorithms in order to
+perform user authentication or identification.
+
+FEBA
+----
+
+The feba.py module contains the basic classes can be extended and configured to:
+1) specify the raw data structure has to be processed
+2) create a hierarchy of action types
+3) extract actions giving a stream of raw data
+4) extract action-specific features
+
+The most important classes are Action, ActionExtractor, and FeatureExtractor.
+The Action class takes care of handling a valid sequence of raw data, according to a given raw data schema, or a
+sequence of other lower hierarchic level actions. Furthermore, it provides methods to validate the action just
+specifying simple conditions over the data sequence, i.e. the action pattern.
+The Action Extractor element receives a raw data sequence as input, and adds each data to all the action objects
+and determines whether a specific action has to be created and stored in the output list.
+The Feature Extractor element calls the feature extraction method of every action and organizes the extracted features
+in a DatasetHandler object.
+
+MOUSE EXAMPLE
+-------------
+
+The mouse_example folder contain an implementation example considering the mouse dynamics use case.
+
+The structure of an atomic raw data is firstly defined using a JSON schema format.
+The MouseAction class takes care of the initialization of a child action class according to the defined raw data
+structure.
+A hierarchy of mouse actions is than defined. For each action, the check_pattern method is overridden to specify the
+conditions need satisfying by a sequence of raw data to be valid for that action type. The extract_feature method is
+overridden to compute custom features. Otherwise, basic features are computed and stored.
+
+In the mouse_example/tests folder, two simple tests allows to extract actions and features after moving the mouse on a
+test data acquisition window.

@@ -1,0 +1,25 @@
+{
+  "title": "mouse raw data",
+  "type": "object",
+  "properties": {
+    "x": {
+      "type": "number"
+    },
+    "y": {
+      "type": "number"
+    },
+    "timestamp": {
+      "type": "number"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": ["move", "mouse-left-down", "mouse-left-up", "mouse-right-down", "mouse-right-up", "scroll" ]
+    }
+  },
+  "required": [
+    "x",
+    "y",
+    "timestamp",
+    "event_type"
+  ]
+}
